@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="form-size">
+        <h3>
+            התחבר
+        </h3>
+        <form method="POST" action="/user/login" >
+            <div class="form-group">
+                <label for="email">אימייל :</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="email">
+            </div>
+            <div class="form-group">
+                <label for="password">סיסמה :</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password">
+            </div>
+            {% if ex  %}
+            <div  class="alert alert-danger" role="alert">
+                <span >{{ ex }}</span><br>
+            </div>
+            {% endif %}
+            <button type="submit" class="btn btn-default">לחץ כאן</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

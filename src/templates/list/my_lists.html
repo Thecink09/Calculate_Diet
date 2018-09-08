@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+{% if user_lists %}
+    <% for list in user_lists %>
+
+    <h3>{{ list.description }}</h3>
+
+    <h6>{{ list.list_of_food }}</h6>
+    <% endfor %>
+{% else %}
+    <h3>אין לך עדיין דיאטות שמורות!</h3>
+{% endif %}
+</div>
+{% endblock %}
