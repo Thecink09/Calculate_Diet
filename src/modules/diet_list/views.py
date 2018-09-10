@@ -2,7 +2,7 @@ from flask import Blueprint, request, session, render_template
 from werkzeug.exceptions import HTTPException
 
 from src.modules.food.food import Food
-from diet_list.diet_list import DietList
+from src.modules.diet_list.diet_list import DietList
 from src.modules.result.result import Result
 from src import decorators
 from src.common.utils import Utils

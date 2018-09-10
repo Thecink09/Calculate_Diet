@@ -5,7 +5,7 @@ from src.modules.diet_list.views import list_blueprint
 from src.modules.food.food import Food
 from src.modules.result.result import Result
 from src import decorators
-from user.user import User
+from src.modules.user.user import User
 
 user_blueprint = Blueprint("user", __name__)
 

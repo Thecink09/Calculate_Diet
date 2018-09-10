@@ -1,6 +1,6 @@
 import uuid
 
-from food.food import Food
+from src.modules.food.food import Food
 from src.common.database import Database
 from src.common.utils import Utils
 

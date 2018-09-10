@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, session, request
 
 from src.modules.diet_list.views import list_blueprint
-from food.food import Food
+from src.modules.food.food import Food
 from src import decorators
 from src.common.database import Database
 from src.exceptions import food_exceptions
