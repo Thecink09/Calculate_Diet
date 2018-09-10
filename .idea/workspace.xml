@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fde4b3bd-7664-4451-abbd-8b0c3ea4ce1d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/modules/diet_list/diet_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/diet_list/diet_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/diet_list/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/diet_list/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/food/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/food/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +43,7 @@
           <entry key="jinja2" value="19" />
           <entry key="js" value="3" />
           <entry key="json" value="1" />
-          <entry key="py" value="139" />
+          <entry key="py" value="140" />
           <entry key="requirements" value="2" />
           <entry key="txt" value="5" />
         </counts>
@@ -58,7 +55,7 @@
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="3" />
           <entry key="PLAIN_TEXT" value="28" />
-          <entry key="Python" value="139" />
+          <entry key="Python" value="140" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -97,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
@@ -143,15 +140,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/result/result.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/user/user.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -172,6 +160,15 @@
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/common/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -227,7 +224,6 @@
         <option value="$PROJECT_DIR$/src/templates/list/my_lists.html" />
         <option value="$PROJECT_DIR$/src/static/css/main.css" />
         <option value="$PROJECT_DIR$/src/templates/list/edit_list.html" />
-        <option value="$PROJECT_DIR$/src/common/utils.py" />
         <option value="$PROJECT_DIR$/src/templates/food/add_food.html" />
         <option value="$PROJECT_DIR$/src/common/database.py" />
         <option value="$PROJECT_DIR$/src/test.py" />
@@ -243,6 +239,7 @@
         <option value="$PROJECT_DIR$/src/modules/diet_list/diet_list.py" />
         <option value="$PROJECT_DIR$/src/modules/food/views.py" />
         <option value="$PROJECT_DIR$/src/modules/user/views.py" />
+        <option value="$PROJECT_DIR$/src/common/utils.py" />
       </list>
     </option>
   </component>
@@ -269,6 +266,12 @@
               <item name="calculate-diet" type="b2602c69:ProjectViewProjectNode" />
               <item name="calculate-diet" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="calculate-diet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="calculate-diet" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="calculate-diet" type="b2602c69:ProjectViewProjectNode" />
@@ -652,13 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/decorators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -752,15 +748,6 @@
     <entry file="file://$PROJECT_DIR$/src/modules/food/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/food/food.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/food/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
@@ -793,6 +780,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/food/food.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>

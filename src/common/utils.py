@@ -1,6 +1,6 @@
 import re
 
-from food.food import Food
+from src.modules.food.food import Food
 from src.exceptions.food_exceptions import InvalidFoodAmount
 
 
