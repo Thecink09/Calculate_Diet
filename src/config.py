@@ -1,6 +1,6 @@
 from flask import Flask
 
-DEBUG = True
+DEBUG = False
 ADMINS = frozenset([
-    "myemail@myemail.com"
+    "thecink09@gmail.com"
 ])

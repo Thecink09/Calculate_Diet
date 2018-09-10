@@ -6,7 +6,7 @@ from src.common.database import Database
 from src.modules.user.views import user_blueprint
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object('src.config')
 app.secret_key = "1234"
 app.register_blueprint(user_blueprint, url_prefix="/user")
 app.register_blueprint(food_blueprint, url_prefix="/food")
