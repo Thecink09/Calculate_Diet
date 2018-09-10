@@ -9,14 +9,9 @@ class Database(object):
     DATABASE = None
 
     @staticmethod
-    def initiate():
-        client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client["fullstack"]
-
-    @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client['fullstack']
+        Database.DATABASE = client['heroku_4wntvk1h']
 
     @staticmethod
     def insert(collection, query):
