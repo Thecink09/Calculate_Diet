@@ -1,13 +1,13 @@
 from flask import Blueprint, request, session, render_template
 from werkzeug.exceptions import HTTPException
 
-from food.food import Food
+from src.modules.food.food import Food
 from diet_list.diet_list import DietList
-from result.result import Result
+from src.modules.result.result import Result
 from src import decorators
 from src.common.utils import Utils
 from src.exceptions import food_exceptions
-from user.user import User
+from src.modules.user.user import User
 
 list_blueprint = Blueprint("list", __name__)
 

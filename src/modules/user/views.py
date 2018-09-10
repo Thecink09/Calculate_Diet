@@ -1,10 +1,9 @@
 from flask import Blueprint, request, render_template, session
 
-import src
 import src.exceptions.user_exceptions as user_exceptions
-from diet_list.views import list_blueprint
-from food.food import Food
-from result.result import Result
+from src.modules.diet_list.views import list_blueprint
+from src.modules.food.food import Food
+from src.modules.result.result import Result
 from src import decorators
 from user.user import User
 

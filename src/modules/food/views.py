@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, session, request
 
-from diet_list.views import list_blueprint
+from src.modules.diet_list.views import list_blueprint
 from food.food import Food
 from src import decorators
 from src.common.database import Database
 from src.exceptions import food_exceptions
-from user.user import User
+from src.modules.user.user import User
 
 food_blueprint = Blueprint("food", __name__)
 

@@ -3,7 +3,7 @@ import uuid
 from flask import session
 import src.exceptions.user_exceptions as user_exceptions
 from src.common.database import Database
-from food.food import Food
+from src.modules.food.food import Food
 from src.common.utils import Utils
 
 
