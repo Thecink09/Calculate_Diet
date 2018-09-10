@@ -64,12 +64,25 @@ class Food(object):
             raise food_exception.NameNotFoundException("Couldnt find this name in the system.")
         return cls(**data)
 
-    def save_to_mongo(self):
-        if Database.find_one("food", {'name': self.name}) is not None:
+    @staticmethod
+    def check_name(name):
+        if Database.find_one("food", {'name': name}) is not None:
             raise food_exception.NameAlreadyExistsException("The name already exists.")
+
+    def update(self):
+        Database.update(collection='food',
+                        query={'_id': self._id},
+                        data=self.json())
+
+    def save_to_mongo(self):
+        Food.check_name(self.name)
         self.load_values()
         Database.insert(collection='food',
                         query=self.json())
+
+    @staticmethod
+    def remove(_id):
+        Database.remove('food', {'_id': _id})
 
     def json(self):
         return {

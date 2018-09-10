@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>ערוך את {{ user_list.title }} </h1>
+    <div class="panel panel-default">
+        {% for food in list_of_food %}
+
+        <div class="panel-body">
+            <p>
+                <span>{{ food.name }}</span>
+                <form action="/list/remove_from_list" method="POST" >
+                    <input class="invisible" name="list_id" value="{{user_list._id}}" />
+                    <input class="invisible" name="id" value="{{food._id}}" />
+                    <input class="invisible" name="gram" value="{{food.gram}}" />
+
+                    <button type="submit" class="btn btn-danger">מחק</button>
+                </form>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

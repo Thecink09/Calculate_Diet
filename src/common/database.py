@@ -27,3 +27,11 @@ class Database(object):
     @staticmethod
     def find(collection, query):
         return Database.DATABASE[collection].find(query)
+
+    @staticmethod
+    def update(collection, query, data):
+        Database.DATABASE[collection].update_one(query, {'$set': data}, upsert=True)
+
+    @staticmethod
+    def remove(collection, query):
+        Database.DATABASE[collection].remove(query)

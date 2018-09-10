@@ -14,11 +14,16 @@
         </div>
         <button type="submit" class="btn btn-default">לחץ כאן</button>
         {% if ex %}
-            <div class="alert danger-alert">
+            <div class="alert alert-danger">
                 <span> {{ ex }}</span>
             </div>
         {% endif %}
-    </form>
 
+    </form>
+    {% if added %}
+        <div class="alert alert-success">
+            <span>המוצר {{ added }} נוסף בהצלחה!</span>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

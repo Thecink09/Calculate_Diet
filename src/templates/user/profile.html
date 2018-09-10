@@ -9,10 +9,11 @@
         </div>
         <div class="form-group">
             בחר את הכמות(גרם):
-            <input type="number" name="gram" id="gram" placeholder="כמה גרם?">
+            <input type="number" name="gram" id="gram" min="0" placeholder="כמה גרם?">
             <button class="btn btn-default" type="submit" >הוסף לתפריט</button>
         </div>
     </form>
+
     <div class="panel panel-default">
         <div class="panel-body">
         {% for food in all_food %}
@@ -24,6 +25,12 @@
     <div class="alert alert-danger" role="alert">
         <span>{{ ex }}</span>
     </div>
+    {% endif %}
+    {% if result and not result.cal == 0.0 %}
+    <a href="#" data-toggle="popover" title="הודעה"  data-placement="top" class="btn btn-default"
+       data-content=" {% include 'list/includes/list_save_includes_html.html' %} " style="width: 110px; margin: 10px auto;">
+        שמירה
+    </a>
     {% endif %}
     {% if current_list %}
     <div class="panel panel-default">
@@ -41,7 +48,7 @@
     </div>
     {% endif %}
     {% if result and not result.cal == 0.0 %}
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h2>כמות ערך תזונתי כוללת : </h2>
         </div>

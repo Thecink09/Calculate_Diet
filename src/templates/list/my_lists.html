@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-{% if user_lists %}
-    <% for list in user_lists %>
-
-    <h3>{{ list.description }}</h3>
-
-    <h6>{{ list.list_of_food }}</h6>
-    <% endfor %>
+{% if user_lists and user_lists|length > 0 %}
+    {% for each_list in user_lists %}
+    <div class="panel panel-default" >
+        <div class="panel-body" >
+            <h3>{{ each_list.title }}</h3>
+            <h6>{{ each_list.description }}</h6>
+            <a class="btn btn-default" href="{{ url_for('list.get_list', list_id=each_list._id) }}">הכנס לפירוט</a>
+            <a class="btn btn-danger" href="#">מחיקה</a>
+            <a class="btn btn-warning" href="{{ url_for('list.edit_list', list_id=each_list._id) }}">עדכון</a>
+            <a class="btn btn-success" href="#">הוסף מוצר</a>
+        </div>
+    </div>
+    {% endfor %}
 {% else %}
     <h3>אין לך עדיין דיאטות שמורות!</h3>
 {% endif %}

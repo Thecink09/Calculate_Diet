@@ -1,6 +1,3 @@
-picked = false
-function pickedFood( name ){
-    picked = true
-    console.log(name)
-    console.log(email)
-}
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({html:true});
+});

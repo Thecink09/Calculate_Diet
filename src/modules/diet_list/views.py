@@ -52,3 +52,48 @@ def my_lists():
     user = User.get_by_email(session['email'])
     user_lists = DietList.get_user_lists(user._id)
     return render_template("list/my_lists.html", user_lists=user_lists)
+
+
+@list_blueprint.route("get_list/<string:list_id>")
+@decorators.requires_login
+def get_list(list_id):
+    user_list = DietList.get_list(list_id)
+    list_of_food = Utils.get_food_list(user_list.list_of_food)
+    return render_template("list/get_list.html", diet_list=list_of_food)
+
+
+@list_blueprint.route("save", methods=["POST"])
+@decorators.requires_login
+def save():
+    user = User.get_by_email(session['email'])
+    title = request.form['title']
+    diet_list = DietList(user_id=user._id,
+                         list_of_food=list_blueprint.current_list,
+                         title=title)
+    diet_list.save_to_mongo()
+    list_blueprint.current_list = []
+    return render_template("user/profile.html", all_food=Food.get_foods(), email=session['email'])
+
+
+@list_blueprint.route("edit_list/<string:list_id>")
+@decorators.requires_login
+def edit_list(list_id):
+    # give the user a page with the list items
+    user_list = DietList.get_list(list_id=list_id)
+    list_of_food = Utils.get_food_list(user_list.list_of_food)
+    return render_template("list/edit_list.html", user_list=user_list, list_of_food=list_of_food)
+
+
+@list_blueprint.route("remove_from_list", methods=["POST"])
+@decorators.requires_login
+def remove_from_list():
+    food = Food.get_food(request.form['id'])
+    food.gram = float(request.form['gram'])
+    DietList.remove_food_from_list(request.form['list_id'], food)
+    user_list = DietList.get_list(request.form['list_id'])
+    if user_list.list_of_food.__len__() == 0:
+        DietList.remove_list(user_list._id)
+        user = User.get_by_email(session['email'])
+        user_lists = DietList.get_user_lists(user._id)
+        return render_template("list/my_lists.html", user_lists = user_lists)
+    return render_template("list/edit_list.html", user_list=user_list, list_of_food=user_list.list_of_food)

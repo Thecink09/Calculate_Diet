@@ -23,7 +23,10 @@
                 {% if session['email'] %}
                     <li class="navbar-left"><a href="/user/logout">התנתק</a></li>
                     <li class="navbar-left"><a href="/list/my_lists">הדיאטות שלי</a></li>
+                    {% if session['email'] in config.ADMINS %}
                     <li class="navbar-left"><a href="/food/add_food">מוצר חדש</a></li>
+                    <li class="navbar-left"><a href="/food/edit_food/list_products">ערוך מוצרים</a></li>
+                    {% endif %}
                 {% else %}
                     <li class="navbar-left"><a href="/user/register">הרשמה לאתר</a></li>
                     <li class="navbar-left"><a href="/user/login">התחבר</a></li>

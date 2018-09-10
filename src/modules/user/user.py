@@ -53,14 +53,6 @@ class User(object):
         user.save_to_mongo()
         session['email'] = email
 
-    def add_food(self):
-        name = input("Insert the food name: ")
-        url = input("Insert the url(to foodsdictionary.com only): ")
-        food = Food(name=name,
-                    user_id=self._id,
-                    url=url)
-        food.save_to_mongo()
-
     @staticmethod
     def list_food():
         all_food = Food.get_foods()

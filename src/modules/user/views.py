@@ -4,6 +4,7 @@ import src
 import src.exceptions.user_exceptions as user_exceptions
 from diet_list.views import list_blueprint
 from food.food import Food
+from result.result import Result
 from src import decorators
 from user.user import User
 
@@ -41,10 +42,10 @@ def register():
         email = request.form['email']
         password = request.form['password']
         try:
-            if User.register(email=email,
-                             password=password):
-                all_food = Food.get_foods()
-                return render_template("user/profile.html", email=email, all_food=all_food)
+            User.register(email=email,
+                          password=password)
+            all_food = Food.get_foods()
+            return render_template("user/profile.html",  email=email, all_food=all_food)
         except user_exceptions.EmailAlreadyExistsException:
             return render_template("user/register.html", ex="אימייל קיים במערכת. האם אתה מנסה להתחבר למשתמש קיים?")
         except user_exceptions.EmailPatternInvalidException:
@@ -56,5 +57,5 @@ def register():
 def logout():
     User.logout()
     list_blueprint.current_list = []
-    list_blueprint.result = None
+    list_blueprint.result = Result()
     return render_template("home.html")
