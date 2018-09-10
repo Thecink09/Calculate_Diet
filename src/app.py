@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 
-from food.views import food_blueprint
-from diet_list.views import list_blueprint
+from src.modules.food.views import food_blueprint
+from src.modules.diet_list.views import list_blueprint
 from src.common.database import Database
 from src.modules.user.views import user_blueprint
 
