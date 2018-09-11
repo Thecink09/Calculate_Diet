@@ -4,6 +4,7 @@ import pymongo
 
 
 class Database(object):
+    #mongodb://127.0.0.1:27017
 
     URI = os.environ.get("MONGODB_URI")
     DATABASE = None
@@ -15,7 +16,7 @@ class Database(object):
 
     @staticmethod
     def insert(collection, query):
-        Database.DATABASE[collection].insert(query)
+        Database.DATABASE[collection].insert_one(query)
 
     @staticmethod
     def find_one(collection, query):

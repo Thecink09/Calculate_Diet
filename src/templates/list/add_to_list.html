@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    {% if ex %}
+        <div class="alert alert-danger">
+            <span> {{ ex }} </span>
+        </div>
+    {% endif %}
+    {% for food in all_food %}
+        <form action=" {{ url_for('list.add_to_my_list', list_id=user_list._id)}}" method="POST">
+            <input type="text" class="invisible" name="id" value="{{ food._id }}"/>
+                <label class="col col-sm-12 col-xs-12"> {{ food.name }}</label>
+                <input class="col col-sm-12 col-xs-12" type="number" min="0" name="gram" placeholder="כמות(גר'):"/>
+            <button type="submit" class="btn btn-success col-lg-2 col-md-2 col-sm-4 col-xs-12">הוסף</button>
+        </form>
+    {% endfor %}
+</div>
+
+{% endblock %}

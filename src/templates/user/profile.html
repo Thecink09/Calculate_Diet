@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             בחר את הכמות(גרם):
-            <input type="number" name="gram" id="gram" min="0" placeholder="כמה גרם?">
+            <input type="number" name="gram" id="gram" min="0">
             <button class="btn btn-default" type="submit" >הוסף לתפריט</button>
         </div>
     </form>
@@ -37,7 +37,7 @@
       <div class="panel-body">
         {% for eachFood in current_list %}
             <div class="list-item">
-                <h3>{{ eachFood.gram }} גרם {{ eachFood.name }}</h3>
+                <h3>{{ eachFood.gram }} גר' {{ eachFood.name }}</h3>
                 <h5>קלוריות : {{ eachFood.cal | round(2, 'floor') }}</h5>
                 <h5>חלבונים : {{  eachFood.pro | round(2, 'floor') }}</h5>
                 <h5>שומנים : {{  eachFood.fat | round(2, 'floor') }}</h5>

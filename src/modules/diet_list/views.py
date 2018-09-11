@@ -19,7 +19,6 @@ list_blueprint.result = Result()
 @decorators.requires_login
 def add_to_list():
     all_food = Food.get_foods()
-
     try:
         name = request.form['name']
         food = Food.get_by_name(name)
@@ -28,7 +27,7 @@ def add_to_list():
         food.gram = gram
         food.calculate_amount_value()
         list_blueprint.current_list.append(food)
-        list_blueprint.result.add_to_result(food=food, amount=gram)
+        list_blueprint.result.add_to_result(food=food)
     except food_exceptions.NameNotFoundException:
         return render_template("user/profile.html", email=session['email'], ex="שם לא נמצא במאגר.",
                                current_food=None, all_food=all_food, current_list=list_blueprint.current_list,
@@ -72,6 +71,7 @@ def save():
                          title=title)
     diet_list.save_to_mongo()
     list_blueprint.current_list = []
+    list_blueprint.result = Result()
     return render_template("user/profile.html", all_food=Food.get_foods(), email=session['email'])
 
 
@@ -82,6 +82,24 @@ def edit_list(list_id):
     user_list = DietList.get_list(list_id=list_id)
     list_of_food = Utils.get_food_list(user_list.list_of_food)
     return render_template("list/edit_list.html", user_list=user_list, list_of_food=list_of_food)
+
+
+@list_blueprint.route("add_to_my_list/<string:list_id>", methods=["POST", "GET"])
+@decorators.requires_login
+def add_to_my_list(list_id=None):
+    if request.method == "POST":
+        try:
+            food = Food.get_food(request.form["id"])
+            food.gram = int(request.form["gram"])
+            DietList.add_to_list(list_id=list_id,
+                                 food=food)
+            user = User.get_by_email(session['email'])
+        except food_exceptions.InvalidFoodAmount:
+            return render_template("list/add_to_list.html", user_list=DietList.get_list(list_id),
+                                   all_food=Food.get_foods(), ex="הכנס כמות אל התיבה.")
+        return render_template("list/my_lists.html", user_lists=DietList.get_user_lists(user._id))
+    return render_template("list/add_to_list.html", user_list=DietList.get_list(list_id),
+                           all_food=Food.get_foods())
 
 
 @list_blueprint.route("remove_from_list", methods=["POST"])
@@ -95,5 +113,15 @@ def remove_from_list():
         DietList.remove_list(user_list._id)
         user = User.get_by_email(session['email'])
         user_lists = DietList.get_user_lists(user._id)
-        return render_template("list/my_lists.html", user_lists = user_lists)
+        return render_template("list/my_lists.html", user_lists=user_lists)
     return render_template("list/edit_list.html", user_list=user_list, list_of_food=user_list.list_of_food)
+
+
+@list_blueprint.route("remove_list/<string:list_id>")
+@decorators.requires_login
+def remove_list(list_id=None):
+    user = User.get_by_email(session['email'])
+    user_lists = DietList.get_user_lists(user._id)
+    if list_id in [each_list._id for each_list in user_lists]:
+        DietList.remove_list(list_id)
+    return render_template("list/my_lists.html", user_lists=DietList.get_user_lists(user._id))

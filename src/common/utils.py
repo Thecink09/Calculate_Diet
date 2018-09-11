@@ -40,3 +40,4 @@ class Utils:
             food.gram = int(each_item.gram)
             full_list.append(food)
         return full_list
+

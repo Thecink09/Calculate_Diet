@@ -8,9 +8,10 @@
             <h3>{{ each_list.title }}</h3>
             <h6>{{ each_list.description }}</h6>
             <a class="btn btn-default" href="{{ url_for('list.get_list', list_id=each_list._id) }}">הכנס לפירוט</a>
-            <a class="btn btn-danger" href="#">מחיקה</a>
+            <a class="btn btn-danger" href="#"  role="button" class="btn popovers" data-toggle="popover"
+                       data-content="לחץ <a href='{{ url_for('list.remove_list', list_id=each_list._id) }}' class='btn btn-danger' title='test add link'>מחק</a>" data-placement="left" title="המוצר יימחק">מחיקה</a>
             <a class="btn btn-warning" href="{{ url_for('list.edit_list', list_id=each_list._id) }}">עדכון</a>
-            <a class="btn btn-success" href="#">הוסף מוצר</a>
+            <a class="btn btn-success" href="{{ url_for('list.add_to_my_list', list_id=each_list._id) }}">הוסף מוצר</a>
         </div>
     </div>
     {% endfor %}

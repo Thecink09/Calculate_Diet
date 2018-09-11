@@ -1,15 +1,17 @@
 import uuid
 
+from src.common.utils import Utils
 from src.modules.food.food import Food
 from src.common.database import Database
-from src.common.utils import Utils
+from src.modules.result.result import Result
 
 
 class DietList(object):
-    def __init__(self, user_id: object, list_of_food: object, title: object, description: object = None, _id: object = None) -> object:
+    def __init__(self, user_id: object, list_of_food: object, title: object, result: object = None, description: object = None, _id: object = None) -> object:
         self.user_id = user_id
         self.list_of_food = list_of_food
         self.title = title
+        self.result = Result.get_result(list_of_food) if result is None else result
         self.description = "" if description is None else description
         self._id = uuid.uuid4().hex if _id is None else _id
 
@@ -37,12 +39,25 @@ class DietList(object):
     def render_list(cls, data):
         list = cls(**data)
         list_of_food = []
+        # fixing list from dict array to obj array
         for each_food in list.list_of_food:
             food = Food.get_food(each_food['_id'])
             food.gram = each_food['gram']
             list_of_food.append(food)
         list.list_of_food = list_of_food
+
+        # fixing result from dict to obj
+        result = Result(cal=list.result['cal'],
+                        pro=list.result['pro'],
+                        fat=list.result['fat'],
+                        carbs=list.result['carbs'])
+        list.result = result
         return list
+
+    @staticmethod
+    def remove_list(list_id):
+        Database.remove(collection='list',
+                        query={'_id': list_id})
 
     @classmethod
     def get_user_lists(cls, user_id):
@@ -52,15 +67,17 @@ class DietList(object):
 
     @staticmethod
     def remove_food_from_list(list_id, food):
-        # this will send the database an update method
-        # with the new list in it
         diet_list = DietList.get_list(list_id)
-        list_of_food = diet_list.list_of_food
-        for i in range(list_of_food.__len__()):
-            if list_of_food[i]._id == food._id and list_of_food[i].gram == food.gram:
-                list_of_food.remove(list_of_food[i])
-                break
-        diet_list.list_of_food = list_of_food
+        diet_list.result.reduce_from_result(food)
+        Database.DATABASE['list'].update_one({'_id': list_id},
+                                             {'$pull': {'list_of_food': {'_id': food._id, 'gram': food.gram}}},
+                                             upsert=True)
+
+    @staticmethod
+    def add_to_list(list_id, food):
+        # fix result - add
+        diet_list = DietList.get_list(list_id)
+        diet_list.list_of_food.append(food)
         Database.update(collection='list',
                         query={'_id': list_id},
                         data=diet_list.json())
@@ -75,5 +92,11 @@ class DietList(object):
             "user_id": self.user_id,
             "title": self.title,
             "list_of_food": DietList.json_list([eachFood for eachFood in self.list_of_food]),
+            "result": {
+                'cal': self.result.cal,
+                'pro': self.result.pro,
+                'fat': self.result.fat,
+                'carbs': self.result.carbs
+            },
             "description": self.description
         }
