@@ -1,4 +1,4 @@
-from food.food import Food
+from src.modules.food.food import Food
 
 
 class Result(object):
