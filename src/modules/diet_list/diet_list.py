@@ -67,10 +67,13 @@ class DietList(object):
 
     @staticmethod
     def remove_food_from_list(list_id, food):
-        Database.DATABASE['list'].update_one({'_id': list_id},
-                                             {'$pull': {'list_of_food': {'_id': food._id, 'gram': food.gram}}},
-                                             upsert=True)
         diet_list = DietList.get_list(list_id)
+        for item in diet_list.list_of_food:
+            item_amount = int(item.gram)
+            food_amount = int(food.gram)
+            if item_amount == food_amount and item._id == food._id:
+                diet_list.list_of_food.remove(item)
+                break
         diet_list.result.reduce_from_result(food)
         diet_list.update_description()
         Database.update(collection='list',
@@ -82,9 +85,9 @@ class DietList(object):
 
     @staticmethod
     def add_to_list(list_id, food):
-        # fix result - add
         diet_list = DietList.get_list(list_id)
         diet_list.list_of_food.append(food)
+        diet_list.result.add_to_result(food)
         diet_list.update_description()
         Database.update(collection='list',
                         query={'_id': list_id},
