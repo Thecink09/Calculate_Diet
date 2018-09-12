@@ -69,15 +69,23 @@ class DietList(object):
     def remove_food_from_list(list_id, food):
         diet_list = DietList.get_list(list_id)
         diet_list.result.reduce_from_result(food)
+        diet_list.update_description()
         Database.DATABASE['list'].update_one({'_id': list_id},
                                              {'$pull': {'list_of_food': {'_id': food._id, 'gram': food.gram}}},
                                              upsert=True)
+        Database.update(collection='list',
+                        query={'_id': diet_list._id},
+                        data=diet_list.json())
+
+    def update_description(self):
+        self.description = Utils.get_list_description(self.list_of_food)
 
     @staticmethod
     def add_to_list(list_id, food):
         # fix result - add
         diet_list = DietList.get_list(list_id)
         diet_list.list_of_food.append(food)
+        diet_list.update_description(diet_list)
         Database.update(collection='list',
                         query={'_id': list_id},
                         data=diet_list.json())
