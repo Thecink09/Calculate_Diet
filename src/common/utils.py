@@ -6,10 +6,6 @@ from src.exceptions.food_exceptions import InvalidFoodAmount
 
 class Utils:
     @staticmethod
-    def get_hello():
-        return "Hello' world"
-
-    @staticmethod
     def valid_email(email):
         email_valid_check = re.compile("^[\w-]+@([\w-]+\.)+[\w]+$")
         return True if email_valid_check.match(email) else False
@@ -27,7 +23,7 @@ class Utils:
             for i in range(list_of_food.__len__()):
                 if i > 0:
                     description += " "
-                description += "{} גרם {}".format(list_of_food[i].gram, list_of_food[i].name)
+                description += "{} גרם {}".format(int(list_of_food[i].gram), list_of_food[i].name)
                 if not i == list_of_food.__len__()-1:
                     description += ","
             return description

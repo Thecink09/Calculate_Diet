@@ -31,8 +31,7 @@ class Result(object):
     @classmethod
     def get_result(cls, list_of_food):
         result = Result()
-        for i in range(list_of_food.__len__()):
-            food = Food.get_food(list_of_food[i]._id)
+        for food in list_of_food:
             result.add_to_result(food=food)
         return result
 
