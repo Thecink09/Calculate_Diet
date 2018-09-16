@@ -57,8 +57,7 @@ def my_lists():
 @decorators.requires_login
 def get_list(list_id):
     user_list = DietList.get_list(list_id)
-    list_of_food = Utils.get_food_list(user_list.list_of_food)
-    return render_template("list/get_list.html", diet_list=list_of_food)
+    return render_template("list/get_list.html", user_list=user_list)
 
 
 @list_blueprint.route("save", methods=["POST"])
@@ -80,8 +79,7 @@ def save():
 def edit_list(list_id):
     # give the user a page with the list items
     user_list = DietList.get_list(list_id=list_id)
-    list_of_food = Utils.get_food_list(user_list.list_of_food)
-    return render_template("list/edit_list.html", user_list=user_list, list_of_food=list_of_food)
+    return render_template("list/edit_list.html", user_list=user_list)
 
 
 @list_blueprint.route("add_to_my_list/<string:list_id>", methods=["POST", "GET"])

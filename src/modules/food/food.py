@@ -48,7 +48,7 @@ class Food(object):
     @classmethod
     def get_foods(cls):
         data = Database.find('food', {})
-        return [cls(**each) for each in data]
+        return [cls(**food) for food in data]
 
     @classmethod
     def get_food(cls, _id):
@@ -97,3 +97,4 @@ class Food(object):
             "gram": self.gram
         }
 
+    # O <-
