@@ -14,6 +14,7 @@ class Utils:
     def valid_amount(gram):
         if gram == "" or gram == "0":
             raise InvalidFoodAmount("Food amount cannot be lower than 1.")
+        return True
 
     @staticmethod
     def get_list_description(list_of_food):

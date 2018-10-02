@@ -2,35 +2,39 @@
 {% block content %}
 
 <div class="container">
+
     {% if user_list %}
 
-        {% for each_item in user_list.list_of_food %}
-               <div class="panel panel-default">
-                   <div class="panel-heading">
-                   {{ each_item.gram }} גרם {{ each_item.name }}
-                   </div>
-                    <div class="list-item">
-                        <h5>קלוריות : {{ each_item.cal | round(2, 'floor') }}</h5>
-                        <h5>חלבונים : {{  each_item.pro | round(2, 'floor') }}</h5>
-                        <h5>שומנים : {{  each_item.fat | round(2, 'floor') }}</h5>
-                        <h5>פחמימות : {{  each_item.carbs | round(2, 'floor') }}</h5>
-                    </div>
-               </div>
-        {% endfor %}
+    {% for each_item in user_list.list_of_food %}
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                כמות ערך תזונתי כוללת :
-            </div>
-            <div class="panel-body result">
-                     <h5>קלוריות : {{ user_list.result.cal | round(2, 'floor') }}</h5>
-                    <h5>חלבונים : {{  user_list.result.pro | round(2, 'floor') }}</h5>
-                    <h5>שומנים : {{  user_list.result.fat | round(2, 'floor') }}</h5>
-                    <h5>פחמימות : {{  user_list.result.carbs | round(2, 'floor') }}</h5>
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ each_item.gram }} גרם {{ each_item.name }}
         </div>
+        <div class="list-item">
+            <h5>קלוריות : {{ each_item.cal | round(2, 'floor') }}</h5>
+            <h5>חלבונים : {{ each_item.pro | round(2, 'floor') }}</h5>
+            <h5>שומנים : {{ each_item.fat | round(2, 'floor') }}</h5>
+            <h5>פחמימות : {{ each_item.carbs | round(2, 'floor') }}</h5>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            כמות ערך תזונתי כוללת :
+        </div>
+        <div class="panel-body result">
+            <h5>קלוריות : {{ user_list.result.cal | round(2, 'floor') }}</h5>
+            <h5>חלבונים : {{ user_list.result.pro | round(2, 'floor') }}</h5>
+            <h5>שומנים : {{ user_list.result.fat | round(2, 'floor') }}</h5>
+            <h5>פחמימות : {{ user_list.result.carbs | round(2, 'floor') }}</h5>
+        </div>
+    </div>
 
     {% endif %}
+
 </div>
 
 {% endblock %}

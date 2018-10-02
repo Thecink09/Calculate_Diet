@@ -3,63 +3,90 @@
 <div class="container">
     <form action="/list/add_to_list" method="POST">
         <div class="form-group">בחר מאכל מהרשימה:
+
             {% if current_food %}
-                <input name="name" id="name" value="{{ current_food.name }}" />
+
+            <input name="name" id="name" value="{{ current_food.name }}"/>
+
             {% endif %}
+
         </div>
         <div class="form-group">
             בחר את הכמות(גרם):
             <input type="number" name="gram" id="gram" min="0">
-            <button class="btn btn-default" type="submit" >הוסף לתפריט</button>
+            <button class="btn btn-default" type="submit">הוסף לתפריט</button>
         </div>
     </form>
 
     <div class="panel panel-default">
         <div class="panel-body">
-        {% for food in all_food %}
-            <a type="button" class="btn btn-default" href="{{ url_for('food.select_food', food_id=food._id) }}" onclick="pickedFood('{{food.name}}')">{{ food.name }}</a>
-        {% endfor %}
+
+            {% for food in all_food %}
+
+            <a type="button" class="btn btn-default" href="{{ url_for('food.select_food', food_id=food._id) }}"
+               onclick="pickedFood('{{food.name}}')">{{ food.name }}</a>
+
+            {% endfor %}
+
         </div>
     </div>
+
     {% if ex %}
+
     <div class="alert alert-danger" role="alert">
         <span>{{ ex }}</span>
     </div>
+
     {% endif %}
+
     {% if result and not result.cal == 0.0 %}
-    <a href="#" data-toggle="popover" title="הודעה"  data-placement="top" class="btn btn-default"
-       data-content=" {% include 'list/includes/list_save_includes_html.html' %} " style="width: 110px; margin: 10px auto;">
+
+    <a href="#" data-toggle="popover" title="הודעה" data-placement="top" class="btn btn-default"
+       data-content=" {% include 'list/includes/list_save_includes_html.html' %} "
+       style="width: 110px; margin: 10px auto;">
         שמירה
     </a>
+
     {% endif %}
+
     {% if current_list %}
+
     <div class="panel panel-default">
-      <div class="panel-body">
-        {% for eachFood in current_list %}
+        <div class="panel-body">
+
+            {% for eachFood in current_list %}
+
             <div class="list-item">
                 <h3>{{ eachFood.gram }} גר' {{ eachFood.name }}</h3>
                 <h5>קלוריות : {{ eachFood.cal | round(2, 'floor') }}</h5>
-                <h5>חלבונים : {{  eachFood.pro | round(2, 'floor') }}</h5>
-                <h5>שומנים : {{  eachFood.fat | round(2, 'floor') }}</h5>
-                <h5>פחמימות : {{  eachFood.carbs | round(2, 'floor') }}</h5>
+                <h5>חלבונים : {{ eachFood.pro | round(2, 'floor') }}</h5>
+                <h5>שומנים : {{ eachFood.fat | round(2, 'floor') }}</h5>
+                <h5>פחמימות : {{ eachFood.carbs | round(2, 'floor') }}</h5>
             </div>
-        {% endfor %}
-      </div>
+
+            {% endfor %}
+
+        </div>
     </div>
+
     {% endif %}
+
     {% if result and not result.cal == 0.0 %}
+
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2>כמות ערך תזונתי כוללת : </h2>
         </div>
         <div class="result">
-                <h3>קלוריות : {{ result.cal | round(2, 'floor') }}</h3>
-                <h3>חלבונים : {{  result.pro | round(2, 'floor') }}</h3>
-                <h3>שומנים : {{  result.fat | round(2, 'floor') }}</h3>
-                <h3>פחמימות : {{  result.carbs | round(2, 'floor') }}</h3>
+            <h3>קלוריות : {{ result.cal | round(2, 'floor') }}</h3>
+            <h3>חלבונים : {{ result.pro | round(2, 'floor') }}</h3>
+            <h3>שומנים : {{ result.fat | round(2, 'floor') }}</h3>
+            <h3>פחמימות : {{ result.carbs | round(2, 'floor') }}</h3>
         </div>
     </div>
+
     {% endif %}
+
 </div>
 
 {% endblock %}

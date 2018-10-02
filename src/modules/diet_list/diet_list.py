@@ -27,7 +27,7 @@ class DietList(object):
         for each_food in list_of_food:
             json_list.append({
                 "_id": each_food._id,
-                "gram": float(each_food.gram)
+                "gram": int(each_food.gram)
             })
         return json_list
 
@@ -65,17 +65,20 @@ class DietList(object):
         if data is not None:
             return [DietList.render_list(data=eachList) for eachList in data]
 
+    def remove_list_item(self, food):
+        self.list_of_food.remove(food)
+        self.result.reduce_from_result(food)
+        self.update_description()
+
     @staticmethod
     def remove_food_from_list(list_id, food):
         diet_list = DietList.get_list(list_id)
         for item in diet_list.list_of_food:
-            item_amount = int(item.gram)
-            food_amount = int(food.gram)
-            if item_amount == food_amount and item._id == food._id:
+            if item._id == food._id and int(item.gram) == int(food.gram):
                 diet_list.list_of_food.remove(item)
-                break
-        diet_list.result.reduce_from_result(food)
-        diet_list.update_description()
+                diet_list.result.reduce_from_result(food)
+                diet_list.update_description()
+            break
         Database.update(collection='list',
                         query={'_id': diet_list._id},
                         data=diet_list.json())

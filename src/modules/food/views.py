@@ -14,14 +14,13 @@ food_blueprint = Blueprint("food", __name__)
 @decorators.requires_login
 def select_food(food_id):
     try:
-        all_food = Food.get_foods()
         current_food = Food.get_food(food_id)
     except food_exceptions.IdNotFoundException:
         return render_template("user/profile.html", email=session['email'],
-                               current_food=None, all_food=all_food, ex="לא נמצא.",
+                               current_food=None, all_food=Food.get_foods(), ex="לא נמצא.",
                                result=list_blueprint.result)
     return render_template("user/profile.html", email=session['email'], current_food=current_food,
-                           all_food=all_food, current_list=list_blueprint.current_list,
+                           all_food=Food.get_foods(), current_list=list_blueprint.current_list,
                            result=list_blueprint.result)
 
 
@@ -55,8 +54,7 @@ def edit_food(food_id=None):
         if not request.form['carbs'] == "":
             food.carbs = float(request.form['carbs'])
         food.update()
-        all_foods = Food.get_foods()
-        return render_template("food/edit_food.html", all_food=all_foods)
+        return render_template("food/edit_food.html", all_food=Food.get_foods())
     elif request.method == "GET":
         try:
             return render_template("food/edit_food.html", food=Food.get_food(food_id))
@@ -67,5 +65,9 @@ def edit_food(food_id=None):
 @food_blueprint.route("/delete_food/<string:food_id>")
 @decorators.requires_admin
 def delete_food(food_id):
-    Food.remove(food_id)
+    try:
+        Food.remove(food_id)
+    except food_exceptions.IdNotFoundException:
+        return render_template("user/profile.html",
+                               all_food=Food.get_foods(), ex="לא נמצא.")
     return render_template("food/edit_food.html", all_food=Food.get_foods())

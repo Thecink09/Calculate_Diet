@@ -26,8 +26,7 @@ def login():
             if User.login_valid(email=email,
                                 password=password):
                 User.login(email)
-                all_food = Food.get_foods()
-                return render_template("user/profile.html", email=email, all_food=all_food)
+                return render_template("user/profile.html", email=email, all_food=Food.get_foods())
         except user_exceptions.WrongPasswordException:
             return render_template("user/login.html", ex="הסיסמה שגויה, נסה שנית.")
         except user_exceptions.UserNotExistsException:

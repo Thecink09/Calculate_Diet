@@ -10,17 +10,17 @@ class Result(object):
 
     def add_to_result(self, food):
         amount = food.gram
-        self.cal += float(food.cal) * float(amount)/100
-        self.pro += float(food.pro) * float(amount)/100
-        self.fat += float(food.fat) * float(amount)/100
-        self.carbs += float(food.carbs) * float(amount)/100
+        self.cal += float(food.cal) * int(amount)/100
+        self.pro += float(food.pro) * int(amount)/100
+        self.fat += float(food.fat) * int(amount)/100
+        self.carbs += float(food.carbs) * int(amount)/100
 
     def reduce_from_result(self, food):
         amount = food.gram
-        self.cal -= float(food.cal) * float(amount) / 100
-        self.pro -= float(food.pro) * float(amount) / 100
-        self.fat -= float(food.fat) * float(amount) / 100
-        self.carbs -= float(food.carbs) * float(amount) / 100
+        self.cal -= float(food.cal) * int(amount) / 100
+        self.pro -= float(food.pro) * int(amount) / 100
+        self.fat -= float(food.fat) * int(amount) / 100
+        self.carbs -= float(food.carbs) * int(amount) / 100
 
     def zero(self):
         self.cal = 0

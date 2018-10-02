@@ -39,7 +39,7 @@ class Food(object):
                 self.fat = amount[i]
 
     def calculate_amount_value(self):
-        gram = float(self.gram)
+        gram = int(self.gram)
         self.cal = self.cal*gram/100
         self.pro = self.pro*gram/100
         self.fat = self.fat*gram/100

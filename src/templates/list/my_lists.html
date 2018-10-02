@@ -1,22 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container">
-{% if user_lists and user_lists|length > 0 %}
+
+    {% if user_lists and user_lists|length > 0 %}
+
     {% for each_list in user_lists %}
-    <div class="panel panel-default" >
-        <div class="panel-body" >
+
+    <div class="panel panel-default">
+        <div class="panel-body">
             <h3>{{ each_list.title }}</h3>
             <h6>{{ each_list.description }}</h6>
             <a class="btn btn-default" href="{{ url_for('list.get_list', list_id=each_list._id) }}">הכנס לפירוט</a>
-            <a class="btn btn-danger" href="#"  role="button" class="btn popovers" data-toggle="popover"
-                       data-content="לחץ <a href='{{ url_for('list.remove_list', list_id=each_list._id) }}' class='btn btn-danger' title='test add link'>מחק</a>" data-placement="left" title="המוצר יימחק">מחיקה</a>
+            <a class="btn btn-danger" href="#" role="button" class="btn popovers" data-toggle="popover"
+               data-content="לחץ <a href='{{ url_for('list.remove_list', list_id=each_list._id) }}' class='btn btn-danger' title='test add link'>מחק</a>"
+               data-placement="left" title="הרשימה יימחק">מחיקה</a>
             <a class="btn btn-warning" href="{{ url_for('list.edit_list', list_id=each_list._id) }}">עדכון</a>
             <a class="btn btn-success" href="{{ url_for('list.add_to_my_list', list_id=each_list._id) }}">הוסף מוצר</a>
         </div>
     </div>
+
     {% endfor %}
-{% else %}
+
+    {% else %}
+
     <h3>אין לך עדיין דיאטות שמורות!</h3>
-{% endif %}
+
+    {% endif %}
+
 </div>
+
 {% endblock %}
