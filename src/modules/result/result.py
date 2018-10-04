@@ -9,18 +9,16 @@ class Result(object):
         self.carbs = 0 if carbs is None else carbs
 
     def add_to_result(self, food):
-        amount = food.gram
-        self.cal += float(food.cal) * int(amount)/100
-        self.pro += float(food.pro) * int(amount)/100
-        self.fat += float(food.fat) * int(amount)/100
-        self.carbs += float(food.carbs) * int(amount)/100
+        self.cal += float(food.cal)
+        self.pro += float(food.pro)
+        self.fat += float(food.fat)
+        self.carbs += float(food.carbs)
 
     def reduce_from_result(self, food):
-        amount = food.gram
-        self.cal -= float(food.cal) * int(amount) / 100
-        self.pro -= float(food.pro) * int(amount) / 100
-        self.fat -= float(food.fat) * int(amount) / 100
-        self.carbs -= float(food.carbs) * int(amount) / 100
+        self.cal -= float(food.cal)
+        self.pro -= float(food.pro)
+        self.fat -= float(food.fat)
+        self.carbs -= float(food.carbs)
 
     def zero(self):
         self.cal = 0
@@ -32,6 +30,7 @@ class Result(object):
     def get_result(cls, list_of_food):
         result = Result()
         for food in list_of_food:
+
             result.add_to_result(food=food)
         return result
 

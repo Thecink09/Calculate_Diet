@@ -76,6 +76,7 @@ class DietList(object):
         for item in diet_list.list_of_food:
             if item._id == food._id and int(item.gram) == int(food.gram):
                 diet_list.list_of_food.remove(item)
+                food.calculate_amount_value()
                 diet_list.result.reduce_from_result(food)
                 diet_list.update_description()
             break
