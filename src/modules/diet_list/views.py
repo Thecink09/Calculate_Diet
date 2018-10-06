@@ -119,3 +119,11 @@ def remove_list(list_id=None):
     if list_id in [each_list._id for each_list in user_lists]:
         DietList.remove_list(list_id)
     return render_template("list/my_lists.html", user_lists=DietList.get_user_lists(user._id))
+
+
+@list_blueprint.route("clean_all")
+@decorators.requires_login
+def clean_all():
+    list_blueprint.result = Result()
+    list_blueprint.current_list = []
+    return render_template("user/profile.html", all_food=Food.get_foods(), email=session['email'])

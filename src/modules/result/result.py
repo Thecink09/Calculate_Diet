@@ -30,7 +30,6 @@ class Result(object):
     def get_result(cls, list_of_food):
         result = Result()
         for food in list_of_food:
-
             result.add_to_result(food=food)
         return result
 

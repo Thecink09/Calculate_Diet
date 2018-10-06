@@ -18,9 +18,17 @@ body{
     margin-bottom: 20px;
     text-decoration: underline;
 }
-
+.list-actions,.list-item, .result{
+    display:flex;
+}
+.list-actions{
+    justify-content: space-between;
+}
+.list-actions a{
+    width: 100px;
+    margin-bottom: 10px;
+}
 .list-item, .result{
-    display: flex;
     flex-flow: wrap;
     justify-content: space-around;
     align-items: center;
