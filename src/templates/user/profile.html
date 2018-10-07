@@ -8,6 +8,10 @@
 
             <input name="name" id="name" value="{{ current_food.name }}"/>
 
+            {% else %}
+
+            <input name="name" id="name" value=""/>
+
             {% endif %}
 
         </div>

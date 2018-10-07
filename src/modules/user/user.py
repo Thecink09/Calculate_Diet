@@ -41,7 +41,7 @@ class User(object):
     @staticmethod
     def login(email):
         session['email'] = email
-
+ד
     @staticmethod
     def register(email, password):
         user = User.get_by_email(email=email)

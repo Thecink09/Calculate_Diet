@@ -14,7 +14,8 @@ user_blueprint = Blueprint("user", __name__)
 @decorators.requires_login
 def profile():
     all_food = Food.get_foods()
-    return render_template("user/profile.html", email=session['email'], all_food=all_food)
+    return render_template("user/profile.html", email=session['email'], all_food=all_food,
+                           result=list_blueprint.result, current_list=list_blueprint.current_list)
 
 
 @user_blueprint.route("/login", methods=["POST", "GET"])
