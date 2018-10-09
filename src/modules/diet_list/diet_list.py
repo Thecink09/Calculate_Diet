@@ -79,7 +79,7 @@ class DietList(object):
                 food.calculate_amount_value()
                 diet_list.result.reduce_from_result(food)
                 diet_list.update_description()
-            break
+                break
         Database.update(collection='list',
                         query={'_id': diet_list._id},
                         data=diet_list.json())
