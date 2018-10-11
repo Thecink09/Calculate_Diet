@@ -20,14 +20,14 @@
             <span> {{ ex }}</span>
         </div>
         {% endif %}
-
+        {% if added %}
+        <div class="alert alert-success">
+            <span>המוצר {{ added }} נוסף בהצלחה!</span>
+        </div>
+        {% endif %}
     </form>
 
-    {% if added %}
-    <div class="alert alert-success">
-        <span>המוצר {{ added }} נוסף בהצלחה!</span>
-    </div>
-    {% endif %}
+
 
 </div>
 
