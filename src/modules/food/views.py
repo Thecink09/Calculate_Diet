@@ -35,7 +35,7 @@ def add_food():
                         url=request.form['url'])
             food.save_to_mongo()
         except food_exceptions.NameAlreadyExistsException:
-            return render_template("add_food.html", ex="שם זה קיים כבר, הכנס שם אחר.")
+            return render_template("food/add_food.html", ex="שם זה קיים כבר, הכנס שם אחר.")
         return render_template("food/add_food.html", added=food.name)
     return render_template("food/add_food.html")
 
