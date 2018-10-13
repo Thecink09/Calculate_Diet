@@ -25,19 +25,42 @@ def select_food(food_id):
 
 
 @food_blueprint.route("/add_food", methods=["POST", "GET"])
-@decorators.requires_admin
+@decorators.requires_login
 def add_food():
+    if request.method == "POST":
+        try:
+            user = User.get_by_email(email=session['email'])
+            food = Food(request.form['name'], user_id=user._id)
+            if not request.form['cal'] == "":
+                food.cal = float(request.form['cal'])
+            if not request.form['pro'] == "":
+                food.pro = float(request.form['pro'])
+            if not request.form['fat'] == "":
+                food.fat = float(request.form['fat'])
+            if not request.form['carbs'] == "":
+                food.carbs = float(request.form['carbs'])
+            food.save_to_mongo()
+        except food_exceptions.NameAlreadyExistsException:
+            return render_template("food/add_food.html", ex="שם זה קיים כבר, הכנס שם אחר.")
+        return render_template("food/add_food.html", added=food.name)
+    return render_template("food/add_food.html")
+
+
+@food_blueprint.route("/add_with_a_link", methods=["POST", "GET"])
+@decorators.requires_login
+def add_with_a_link():
     if request.method == "POST":
         user = User.get_by_email(session['email'])
         try:
             food = Food(name=request.form['name'],
                         user_id=user._id,
                         url=request.form['url'])
+            food.load_values()
             food.save_to_mongo()
         except food_exceptions.NameAlreadyExistsException:
-            return render_template("food/add_food.html", ex="שם זה קיים כבר, הכנס שם אחר.")
-        return render_template("food/add_food.html", added=food.name)
-    return render_template("food/add_food.html")
+            return render_template("food/add_with_a_link.html", ex="שם זה קיים כבר, הכנס שם אחר.")
+        return render_template("food/add_with_a_link.html", added=food.name)
+    return render_template("food/add_with_a_link.html")
 
 
 @food_blueprint.route("/edit_food/<string:food_id>", methods=["POST", "GET"])

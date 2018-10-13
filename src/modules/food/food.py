@@ -7,11 +7,11 @@ import src.exceptions.food_exceptions as food_exception
 
 
 class Food(object):
-    def __init__(self, name, user_id, url, cal=None, fat=None, pro=None, carbs=None, gram=None, _id=None):
+    def __init__(self, name, user_id, url=None, cal=None, fat=None, pro=None, carbs=None, gram=None, _id=None):
         self.name = name
         self.user_id = user_id
-        self.url = url
-        self.cal = 0 if cal is None else cal
+        self.url = "n/a" if url is None else url
+        self.cal = float(0) if cal is None else cal
         self.fat = 0 if fat is None else fat
         self.pro = 0 if pro is None else pro
         self.carbs = 0 if carbs is None else carbs
@@ -78,7 +78,6 @@ class Food(object):
 
     def save_to_mongo(self):
         Food.check_name(self.name)
-        self.load_values()
         Database.insert(collection='food',
                         query=self.json())
 

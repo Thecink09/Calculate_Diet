@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <form class="form-size" method="POST">
+        <h3>מוצר חדש</h3>
+        <div class="form-group">
+            <label for="name">הכנס שם מוצר</label>
+            <input id="name" name="name" type="text" placeholder="הכנס את שם המוצר או הארוחה"/>
+        </div>
+        <div class="form-group">
+            <label for="url">הכנס את הלינק</label>
+            <input id="url" name="url" type="text" placeholder="הכנס לינק למוצר" aria-describedby="link-description">
+            <span id="link-description" class="help-block">לינק מהאתרים הבאים : "foodsdictionary" בלבד יהיו תקינים</span>
+        </div>
+        <button type="submit" class="btn btn-default" style="margin-bottom: 20px;">לחץ כאן</button>
+
+        {% if ex %}
+        <div class="alert alert-danger">
+            <span> {{ ex }}</span>
+        </div>
+        {% endif %}
+        {% if added %}
+        <div class="alert alert-success">
+            <span>המוצר {{ added }} נוסף בהצלחה!</span>
+        </div>
+        {% endif %}
+    </form>
+
+
+
+</div>
+
+{% endblock %}
