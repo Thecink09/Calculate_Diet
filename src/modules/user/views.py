@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, session
 
 import src.exceptions.user_exceptions as user_exceptions
+from src.config import ADMINS
 from src.modules.diet_list.views import list_blueprint
 from src.modules.food.food import Food
 from src.modules.result.result import Result
@@ -8,13 +9,13 @@ from src import decorators
 from src.modules.user.user import User
 
 user_blueprint = Blueprint("user", __name__)
+user_blueprint.user_food = []
 
 
 @user_blueprint.route("/profile")
 @decorators.requires_login
 def profile():
-    all_food = Food.get_foods()
-    return render_template("user/profile.html", email=session['email'], all_food=all_food,
+    return render_template("user/profile.html", email=session['email'], all_food=user_blueprint.user_food,
                            result=list_blueprint.result, current_list=list_blueprint.current_list)
 
 
@@ -27,7 +28,13 @@ def login():
             if User.login_valid(email=email,
                                 password=password):
                 User.login(email)
-                return render_template("user/profile.html", email=email, all_food=Food.get_foods())
+                if email in ADMINS:
+                    user_blueprint.user_food = Food.get_foods()
+                else:
+                    admin = User.get_by_email("thecink09@gmail.com")
+                    user = User.get_by_email(email)
+                    user_blueprint.user_food = Food.get_by_user_id(admin._id) + Food.get_by_user_id(user._id)
+                return render_template("user/profile.html", email=email, all_food=user_blueprint.user_food)
         except user_exceptions.WrongPasswordException:
             return render_template("user/login.html", ex="הסיסמה שגויה, נסה שנית.")
         except user_exceptions.UserNotExistsException:
@@ -43,8 +50,9 @@ def register():
         try:
             User.register(email=email,
                           password=password)
-            all_food = Food.get_foods()
-            return render_template("user/profile.html",  email=email, all_food=all_food)
+            admin = User.get_by_email("thecink09@gmail.com")
+            user_blueprint.user_food = Food.get_by_user_id(admin.user_id)
+            return render_template("user/profile.html",  email=email, all_food=user_blueprint.user_food)
         except user_exceptions.EmailAlreadyExistsException:
             return render_template("user/register.html", ex="אימייל קיים במערכת. האם אתה מנסה להתחבר למשתמש קיים?")
         except user_exceptions.EmailPatternInvalidException:
@@ -55,6 +63,7 @@ def register():
 @user_blueprint.route("/logout")
 def logout():
     User.logout()
+    user_blueprint.user_food = []
     list_blueprint.current_list = []
     list_blueprint.result = Result()
     return render_template("home.html")

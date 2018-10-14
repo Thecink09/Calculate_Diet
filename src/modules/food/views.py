@@ -3,9 +3,9 @@ from flask import Blueprint, render_template, session, request
 from src.modules.diet_list.views import list_blueprint
 from src.modules.food.food import Food
 from src import decorators
-from src.common.database import Database
 from src.exceptions import food_exceptions
 from src.modules.user.user import User
+from user.views import user_blueprint
 
 food_blueprint = Blueprint("food", __name__)
 
@@ -20,7 +20,7 @@ def select_food(food_id):
                                current_food=None, all_food=Food.get_foods(), ex="לא נמצא.",
                                result=list_blueprint.result)
     return render_template("user/profile.html", email=session['email'], current_food=current_food,
-                           all_food=Food.get_foods(), current_list=list_blueprint.current_list,
+                           all_food=user_blueprint.user_food, current_list=list_blueprint.current_list,
                            result=list_blueprint.result)
 
 
@@ -40,6 +40,7 @@ def add_food():
             if not request.form['carbs'] == "":
                 food.carbs = float(request.form['carbs'])
             food.save_to_mongo()
+            user_blueprint.user_food.append(food)
         except food_exceptions.NameAlreadyExistsException:
             return render_template("food/add_food.html", ex="שם זה קיים כבר, הכנס שם אחר.")
         return render_template("food/add_food.html", added=food.name)
@@ -57,6 +58,7 @@ def add_with_a_link():
                         url=request.form['url'])
             food.load_values()
             food.save_to_mongo()
+            user_blueprint.user_food.append(food)
         except food_exceptions.NameAlreadyExistsException:
             return render_template("food/add_with_a_link.html", ex="שם זה קיים כבר, הכנס שם אחר.")
         return render_template("food/add_with_a_link.html", added=food.name)

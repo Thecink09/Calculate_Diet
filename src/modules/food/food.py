@@ -11,7 +11,7 @@ class Food(object):
         self.name = name
         self.user_id = user_id
         self.url = "n/a" if url is None else url
-        self.cal = float(0) if cal is None else cal
+        self.cal = 0 if cal is None else cal
         self.fat = 0 if fat is None else fat
         self.pro = 0 if pro is None else pro
         self.carbs = 0 if carbs is None else carbs
@@ -46,6 +46,12 @@ class Food(object):
         self.pro = self.pro*gram/100
         self.fat = self.fat*gram/100
         self.carbs = self.carbs*gram/100
+
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        data = Database.find(collection='food',
+                             query={'user_id': user_id})
+        return [cls(**food) for food in data]
 
     @classmethod
     def get_foods(cls):
