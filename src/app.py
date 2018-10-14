@@ -21,4 +21,3 @@ def initialize_database():
 @app.route("/")
 def home_page():
     return render_template("home.html")
-

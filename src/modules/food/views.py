@@ -5,7 +5,7 @@ from src.modules.food.food import Food
 from src import decorators
 from src.exceptions import food_exceptions
 from src.modules.user.user import User
-from user.views import user_blueprint
+from src.modules.user.views import user_blueprint
 
 food_blueprint = Blueprint("food", __name__)
 
