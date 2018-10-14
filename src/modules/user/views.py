@@ -51,7 +51,7 @@ def register():
             User.register(email=email,
                           password=password)
             admin = User.get_by_email("thecink09@gmail.com")
-            user_blueprint.user_food = Food.get_by_user_id(admin.user_id)
+            user_blueprint.user_food = Food.get_by_user_id(admin._id)
             return render_template("user/profile.html",  email=email, all_food=user_blueprint.user_food)
         except user_exceptions.EmailAlreadyExistsException:
             return render_template("user/register.html", ex="אימייל קיים במערכת. האם אתה מנסה להתחבר למשתמש קיים?")
