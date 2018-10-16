@@ -27,8 +27,9 @@ class Food(object):
         del values_name[0:5]
         elements = soup.find_all("td", {'id': re.compile('^currentValue')})
         amount = [float(eachElement.text.strip()) for eachElement in elements]
-        for i in range(values_name.__len__()):
-            values_name[i] = values_name[i].encode("latin_1").decode("cp1255")
+        if values_name[0] != "קלוריות":
+            for i in range(values_name.__len__()):
+                values_name[i] = values_name[i].encode("latin_1").decode("cp1255")
         for i in range(values_name.__len__()):
             current_value = values_name[i]
             if current_value == "קלוריות":
