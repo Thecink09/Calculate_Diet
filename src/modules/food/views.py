@@ -91,6 +91,10 @@ def edit_food(food_id=None):
 @decorators.requires_admin
 def delete_food(food_id):
     try:
+        for food in user_blueprint.user_food:
+            if food._id == food_id:
+                user_blueprint.user_food.remove(food)
+                break;
         Food.remove(food_id)
     except food_exceptions.IdNotFoundException:
         return render_template("user/profile.html",
