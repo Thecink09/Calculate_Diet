@@ -67,7 +67,7 @@ def add_with_a_link():
 
 
 @food_blueprint.route("/edit_food/<string:food_id>", methods=["POST", "GET"])
-@decorators.requires_admin
+@decorators.requires_login
 def edit_food(food_id=None):
     if request.method == "POST":
         food = Food.get_food(food_id)
