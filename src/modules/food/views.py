@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, request
 
+from src.config import ADMINS
 from src.modules.diet_list.views import list_blueprint
 from src.modules.food.food import Food
 from src import decorators
@@ -84,7 +85,12 @@ def edit_food(food_id=None):
         try:
             return render_template("food/edit_food.html", food=Food.get_food(food_id))
         except food_exceptions.IdNotFoundException:
-            return render_template("food/edit_food.html", all_food=Food.get_foods())
+            if session['email'] in ADMINS:
+                all_food = Food.get_foods()
+            else:
+                user = User.get_by_email(session['email'])
+                all_food = Food.get_by_user_id(user_id=user._id)
+            return render_template("food/edit_food.html", all_food=all_food)
 
 
 @food_blueprint.route("/delete_food/<string:food_id>")

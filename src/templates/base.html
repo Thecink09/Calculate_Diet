@@ -38,12 +38,7 @@
                         <li><a href="/food/add_with_a_link">הוסף באמצעות קישור</a></li>
                     </ul>
                 </li>
-
-                {% if session['email'] in config.ADMINS %}
-
                 <li class="navbar-left"><a href="/food/edit_food/list_products">ערוך מוצרים</a></li>
-
-                {% endif %}
 
                 {% else %}
 
