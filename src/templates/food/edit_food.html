@@ -23,7 +23,7 @@
 
     {% elif food %}
 
-    <div class="form-size" style="width: 600px;">
+    <div class="form-size">
         <form action="{{ url_for('food.edit_food', food_id=food._id) }}" method="POST">
             <h3 aria-describedby="header-describe-updatetext">עדכן את הערך התזונתי של {{ food.name }} </h3>
             <span id="header-describe-updatetext" class="help-block">ערך שאותו תשאירו ריק ישאר רשום ולא יעודכן.</span>
