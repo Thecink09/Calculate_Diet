@@ -26,6 +26,7 @@ class User(object):
             return True
         try:
             if not Utils.check_hashed_password(password=password, hashed_password=user.password):
+                raise user_exceptions.WrongPasswordException("The password is not correct.")
         except InvalidHashError:
             raise user_exceptions.WrongPasswordException("The password is not correct.")
         return True

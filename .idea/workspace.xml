@@ -79,7 +79,7 @@
           <entry key="JSON" value="2" />
           <entry key="JavaScript" value="125" />
           <entry key="PLAIN_TEXT" value="353" />
-          <entry key="Python" value="25092" />
+          <entry key="Python" value="25105" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -92,7 +92,7 @@
           <entry key="jinja2" value="165" />
           <entry key="js" value="125" />
           <entry key="json" value="2" />
-          <entry key="py" value="24995" />
+          <entry key="py" value="25008" />
           <entry key="txt" value="52" />
         </counts>
       </usages-collector>
@@ -140,8 +140,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modules/user/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="25" column="23" lean-forward="true" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+            <state relative-caret-position="237">
+              <caret line="28" column="92" selection-start-line="28" selection-start-column="92" selection-end-line="28" selection-end-column="92" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -868,8 +868,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/user/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="25" column="23" lean-forward="true" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        <state relative-caret-position="237">
+          <caret line="28" column="92" selection-start-line="28" selection-start-column="92" selection-end-line="28" selection-end-column="92" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
