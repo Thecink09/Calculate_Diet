@@ -1,5 +1,5 @@
 import uuid
-
+from passlib.exc import InvalidHashError
 from flask import session
 import src.exceptions.user_exceptions as user_exceptions
 from src.common.database import Database
@@ -22,9 +22,11 @@ class User(object):
         user = User.get_by_email(email=email)
         if user is None:
             raise user_exceptions.UserNotExistsException("The user not exists in the system.")
-        if not Utils.check_hashed_password(password=password, hashed_password=user.password):
-            if password == user.password:
-                return True
+        if password == user.password:
+            return True
+        try:
+            if not Utils.check_hashed_password(password=password, hashed_password=user.password):
+        except InvalidHashError:
             raise user_exceptions.WrongPasswordException("The password is not correct.")
         return True
 
