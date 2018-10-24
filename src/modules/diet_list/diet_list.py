@@ -17,9 +17,18 @@ class DietList(object):
 
     def save_to_mongo(self):
         if self.description == "":
-            self.description = Utils.get_list_description(self.list_of_food)
+            self.description = DietList.get_list_description(self.list_of_food)
         Database.insert(collection='list',
                         query=self.json())
+
+    @staticmethod
+    def get_food_list(list_of_food):
+        full_list = []
+        for each_item in list_of_food:
+            food = Food.get_food(each_item._id)
+            food.gram = int(each_item.gram)
+            full_list.append(food)
+        return full_list
 
     @staticmethod
     def json_list(list_of_food):
@@ -71,6 +80,19 @@ class DietList(object):
         self.update_description()
 
     @staticmethod
+    def get_list_description(list_of_food):
+        if list_of_food.__len__() == 0:
+            pass
+        description = ""
+        for i in range(list_of_food.__len__()):
+            if i > 0:
+                description += " "
+            description += "{} גרם {}".format(int(list_of_food[i].gram), list_of_food[i].name)
+            if not i == list_of_food.__len__()-1:
+                description += ","
+        return description
+
+    @staticmethod
     def remove_food_from_list(list_id, food):
         diet_list = DietList.get_list(list_id)
         for item in diet_list.list_of_food:
@@ -85,7 +107,7 @@ class DietList(object):
                         data=diet_list.json())
 
     def update_description(self):
-        self.description = Utils.get_list_description(self.list_of_food)
+        self.description = DietList.get_list_description(self.list_of_food)
 
     @staticmethod
     def add_to_list(list_id, food):
