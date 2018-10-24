@@ -22,7 +22,9 @@ class User(object):
         user = User.get_by_email(email=email)
         if user is None:
             raise user_exceptions.UserNotExistsException("The user not exists in the system.")
-        if not user.password == password:
+        if not Utils.check_hashed_password(password=password, hashed_password=user.password):
+            if password == user.password:
+                return True
             raise user_exceptions.WrongPasswordException("The password is not correct.")
         return True
 
@@ -78,5 +80,5 @@ class User(object):
         return {
             "_id": self._id,
             "email": self.email,
-            "password": self.password
+            "password": Utils.hash_password(self.password)
         }

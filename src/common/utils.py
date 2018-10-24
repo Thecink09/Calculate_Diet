@@ -1,5 +1,5 @@
 import re
-
+from passlib.hash import pbkdf_sha512
 from src.modules.food.food import Food
 from src.exceptions.food_exceptions import InvalidFoodAmount
 
@@ -16,3 +16,10 @@ class Utils:
             raise InvalidFoodAmount("Food amount cannot be lower than 1.")
         return True
 
+    @staticmethod
+    def check_hashed_password(password, hashed_password):
+        return pbkdf_sha512.verify(password, hashed_password)
+
+    @staticmethod
+    def hash_password(password):
+        return pbkdf_sha512.encrypt(password)
