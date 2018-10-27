@@ -6,7 +6,6 @@ from src.common.database import Database
 from src.modules.food.food import Food
 from src.common.utils import Utils
 
-
 class User(object):
     def __init__(self, email, password, _id=None):
         self.email = email
@@ -19,7 +18,7 @@ class User(object):
 
     @staticmethod
     def login_valid(email, password):
-        user = User.get_by_email(email=email)
+        user = User.get_by_email(email=email.lower())
         if user is None:
             raise user_exceptions.UserNotExistsException("The user not exists in the system.")
         if password == user.password:
@@ -34,7 +33,7 @@ class User(object):
     @classmethod
     def get_by_email(cls, email):
         user = Database.find_one(collection='users',
-                                 query={'email': email})
+                                 query={'email': email.lower()})
         if user is not None:
             return cls(**user)
 
@@ -45,18 +44,18 @@ class User(object):
 
     @staticmethod
     def login(email):
-        session['email'] = email
+        session['email'] = email.lower()
 
     @staticmethod
     def register(email, password):
-        user = User.get_by_email(email=email)
+        user = User.get_by_email(email=email.lower())
         if user is not None:
             raise user_exceptions.EmailAlreadyExistsException("The given email address already exists in the system.")
         if not Utils.valid_email(email=email):
             raise user_exceptions.EmailPatternInvalidException("The given email doesnt stand the email conventions.")
-        user = User(email=email, password=password)
+        user = User(email=email.lower(), password=password)
         user.save_to_mongo()
-        session['email'] = email
+        session['email'] = user.email
 
     @staticmethod
     def list_food():
