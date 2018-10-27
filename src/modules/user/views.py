@@ -28,7 +28,7 @@ def login():
             if User.login_valid(email=email,
                                 password=password):
                 User.login(email)
-                if email in ADMINS:
+                if email.lower() in ADMINS:
                     user_blueprint.user_food = Food.get_foods()
                 else:
                     admin = User.get_by_email("thecink09@gmail.com")
