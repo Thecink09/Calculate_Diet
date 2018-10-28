@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, session
 
 import src.exceptions.user_exceptions as user_exceptions
+from src.common.utils import Utils
 from src.config import ADMINS
 from src.modules.diet_list.views import list_blueprint
 from src.modules.food.food import Food
@@ -46,13 +47,18 @@ def login():
 def register():
     if request.method == "POST":
         email = request.form['email']
+        password2 = request.form['match_email']
         password = request.form['password']
         try:
+            Utils.match_password(password1=password,
+                                 password2=password2)
             User.register(email=email,
                           password=password)
             admin = User.get_by_email("thecink09@gmail.com")
             user_blueprint.user_food = Food.get_by_user_id(admin._id)
             return render_template("user/profile.html",  email=email, all_food=user_blueprint.user_food)
+        except user_exceptions.PasswordNotMatchedException:
+            return render_template("user/register.html", ex="שני הסיסמאות אינן תואמות")
         except user_exceptions.EmailAlreadyExistsException:
             return render_template("user/register.html", ex="אימייל קיים במערכת. האם אתה מנסה להתחבר למשתמש קיים?")
         except user_exceptions.EmailPatternInvalidException:

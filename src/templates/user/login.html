@@ -9,11 +9,11 @@
         <form method="POST" action="/user/login">
             <div class="form-group">
                 <label for="email">אימייל :</span></label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="">
+                <input type="email" class="form-control" name="email" id="email" placeholder="" required>
             </div>
             <div class="form-group">
                 <label for="password">סיסמה :</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="">
+                <input type="password" class="form-control" name="password" id="password" placeholder="" required>
             </div>
 
             {% if ex %}

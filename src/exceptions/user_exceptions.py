@@ -4,6 +4,10 @@ class UserException(Exception):
         self.message = message
 
 
+class PasswordNotMatchedException(UserException):
+    pass
+
+
 class EmailAlreadyExistsException(UserException):
     pass
 
