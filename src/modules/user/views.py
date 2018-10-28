@@ -47,7 +47,7 @@ def login():
 def register():
     if request.method == "POST":
         email = request.form['email']
-        password2 = request.form['match_email']
+        password2 = request.form['match_password']
         password = request.form['password']
         try:
             Utils.match_password(password1=password,
