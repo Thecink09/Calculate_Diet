@@ -8,12 +8,18 @@
         </h3>
         <form method="POST" action="/user/login">
             <div class="form-group">
-                <label for="email">אימייל :</span></label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="" required>
+                <label class="email"> אימייל : </label>
+                <div class="input-group">
+                  <span class="input-group-addon glyphicon glyphicon-user" id="input-user-icon"></span>
+                  <input type="email"  name="email" id="email" class="form-control" placeholder="" >
+                </div>
             </div>
             <div class="form-group">
-                <label for="password">סיסמה :</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="" required>
+                <label class="password"> סיסמה : </label>
+                <div class="input-group">
+                  <span class="input-group-addon  glyphicon glyphicon-lock" id="input-lock-icon"></span>
+                  <input type="password" name="password" id="password" class="form-control" placeholder="" >
+                </div>
             </div>
 
             {% if ex %}
@@ -25,7 +31,7 @@
             {% endif %}
 
             <button type="submit" class="btn btn-default">התחבר/י</button>
-        </form>
+        </>
     </div>
 </div>
 
