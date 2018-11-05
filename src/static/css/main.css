@@ -1,7 +1,14 @@
-body{
-    direction: rtl;
+*{
+    margin: 0px;
+    padding: 0px;
 }
-
+html, body{
+    direction: rtl;
+    height: 100%;
+}
+.container{
+    min-height: 100%;
+}
 .form-size{
     width: 290px;
     margin: 100px auto;
@@ -61,4 +68,10 @@ body{
 }
 .invisible{
     display: none;
+}
+
+#footer{
+    position: relative;
+    width: 100%;
+    bottom: 0px;
 }
