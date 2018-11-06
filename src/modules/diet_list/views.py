@@ -8,7 +8,6 @@ from src import decorators
 from src.common.utils import Utils
 from src.exceptions import food_exceptions
 from src.modules.user.user import User
-from src.modules.user.views import user_blueprint
 
 list_blueprint = Blueprint("list", __name__)
 
@@ -29,18 +28,18 @@ def add_to_list():
             list_blueprint.result.add_to_result(food=food)
     except food_exceptions.NameNotFoundException:
         return render_template("user/profile.html", email=session['email'], ex="שם לא נמצא במאגר.",
-                               current_food=None, all_food=user_blueprint.user_food, current_list=list_blueprint.current_list,
+                               current_food=None, all_food=Food.get_foods(), current_list=list_blueprint.current_list,
                                result=list_blueprint.result)
     except HTTPException:
         return render_template("user/profile.html", email=session['email'], ex="אנא בחר מוצר מתוך הטבלה.",
-                               current_food=None, all_food=user_blueprint.user_food, current_list=list_blueprint.current_list,
+                               current_food=None, all_food=Food.get_foods(), current_list=list_blueprint.current_list,
                                result=list_blueprint.result)
     except food_exceptions.InvalidFoodAmount:
         return render_template("user/profile.html", email=session['email'], ex="אנא הוסף כמות.",
-                               current_food=None, all_food=user_blueprint.user_food, current_list=list_blueprint.current_list,
+                               current_food=None, all_food=Food.get_foods(), current_list=list_blueprint.current_list,
                                result=list_blueprint.result)
     return render_template("user/profile.html", email=session['email'],
-                           current_food=None, all_food=user_blueprint.user_food, current_list=list_blueprint.current_list,
+                           current_food=None, all_food=Food.get_foods(), current_list=list_blueprint.current_list,
                            result=list_blueprint.result)
 
 

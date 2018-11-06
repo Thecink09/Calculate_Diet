@@ -94,15 +94,15 @@ def edit_food(food_id=None):
 
 
 @food_blueprint.route("/delete_food/<string:food_id>")
-@decorators.requires_login
+@decorators.requires_admin
 def delete_food(food_id):
     try:
         for food in user_blueprint.user_food:
             if food._id == food_id:
                 user_blueprint.user_food.remove(food)
-                Food.remove(food_id)
-                break
+                break;
+        Food.remove(food_id)
     except food_exceptions.IdNotFoundException:
         return render_template("user/profile.html",
-                               all_food=user_blueprint.user_food, ex="לא נמצא.")
+                               all_food=Food.get_foods(), ex="לא נמצא.")
     return render_template("food/edit_food.html", all_food=Food.get_foods())
