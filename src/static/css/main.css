@@ -9,7 +9,7 @@ html, body{
 .container{
     min-height: 100%;
 }
-form btn-default:hover{
+form .btn-default:hover{
     font-weight: 600
 }
 .form-size{
