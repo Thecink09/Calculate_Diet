@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, session
 import src.exceptions.user_exceptions as user_exceptions
 from src.common.utils import Utils
 from src.config import ADMINS
-from src.modules.diet_list.views import list_blueprint
+
 from src.modules.food.food import Food
 from src.modules.result.result import Result
 from src import decorators
@@ -16,6 +16,7 @@ user_blueprint.user_food = []
 @user_blueprint.route("/profile")
 @decorators.requires_login
 def profile():
+    from src.modules.diet_list.views import list_blueprint
     return render_template("user/profile.html", email=session['email'], all_food=user_blueprint.user_food,
                            result=list_blueprint.result, current_list=list_blueprint.current_list)
 
@@ -68,6 +69,7 @@ def register():
 
 @user_blueprint.route("/logout")
 def logout():
+    from src.modules.diet_list.views import list_blueprint
     User.logout()
     user_blueprint.user_food = []
     list_blueprint.current_list = []
