@@ -69,7 +69,7 @@ def save():
     diet_list.save_to_mongo()
     list_blueprint.current_list = []
     list_blueprint.result = Result()
-    return render_template("user/profile.html", all_food=Food.get_foods(), email=session['email'])
+    return render_template("user/profile.html", all_food=user_blueprint.user_food, email=session['email'])
 
 
 @list_blueprint.route("edit_list/<string:list_id>")
@@ -127,4 +127,4 @@ def remove_list(list_id=None):
 def clean_all():
     list_blueprint.result = Result()
     list_blueprint.current_list = []
-    return render_template("user/profile.html", all_food=Food.get_foods(), email=session['email'])
+    return render_template("user/profile.html", all_food=user_blueprint.user_food, email=session['email'])
